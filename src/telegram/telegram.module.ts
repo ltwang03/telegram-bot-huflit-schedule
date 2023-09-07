@@ -9,6 +9,12 @@ import { ConfigService } from '@nestjs/config';
     TelegrafModule.forRootAsync({
       useFactory: async (config: ConfigService) => ({
         token: config.get('TELEGRAM_KEY'),
+        launchOptions: {
+          webhook: {
+            domain: '20.2.240.71:8080',
+            hookPath: '/web-hook',
+          },
+        },
       }),
       inject: [ConfigService],
     }),
