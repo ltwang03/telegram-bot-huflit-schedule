@@ -15,10 +15,14 @@ export class TelegramService {
   ) {}
   @Command('schedule')
   async main(@Ctx() ctx) {
-    const [message] = await Promise.all([ctx.message]);
-    const [command, mssv] = message.text.split(' ');
+    const message = await ctx.message;
+    const [command, ...args] = message.text.split(' ');
+    const mssv = args.join(' ');
+    const reg = /^\d[\d\w]{8}\d$/;
     if (!mssv) {
-      await ctx.reply('Không có thời khoá biểu!');
+      await ctx.reply('Nhập mã sinh viên vàoooooo!');
+    } else if (!reg.test(mssv)) {
+      await ctx.reply('Mã số sinh viên không hợp lệ!');
     } else {
       const cookie = await this.getCookie();
       const [termId, weekId, yearStudy] = await this.getPropertiesOnSchedule(
