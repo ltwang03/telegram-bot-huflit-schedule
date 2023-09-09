@@ -11,8 +11,8 @@ import { ConfigService } from '@nestjs/config';
         token: config.get('TELEGRAM_KEY'),
         launchOptions: {
           webhook: {
-            domain: '20.2.240.71:8443',
-            hookPath: '/web-hook',
+            domain: config.get('DOMAIN'),
+            hookPath: '/secret-path',
           },
         },
       }),
