@@ -1,0 +1,18 @@
+version: '3'
+services:
+  bot-huflit:
+    build:
+      context: ./
+    container_name: bot-huflit
+    hostname: bot-huflit
+    ports:
+      - '8000:8080'
+  nginx:
+    build:
+      context: ./nginx
+    container_name: nginx
+    hostname: nginx
+    ports:
+      - '80:80'
+    depends_on:
+      - bot-huflit
